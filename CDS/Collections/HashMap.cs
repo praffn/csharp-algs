@@ -82,7 +82,34 @@ namespace CDS.Collections
         
         public V Remove(K key)
         {
-            throw new NotImplementedException();
+            if (!ContainsKey(key))
+                return default(V);
+            var i = Hash(key);
+
+            while (!key.Equals(_keys[i]))
+                i = (i + 1) % _m;
+
+            var ret = _values[i];
+            _keys[i] = default(K);
+            _values[i] = default(V);
+
+            i = (i + 1) % _m;
+            while (_keys[i] != null)
+            {
+                var rehashKey = _keys[i];
+                var rehashVal = _values[i];
+                _keys[i] = default(K);
+                _values[i] = default(V);
+                Count--;
+                this[rehashKey] = rehashVal;
+                i = (i + 1) % _m;
+            }
+            Count--;
+            
+            if (Count > 0 && Count <= _m / 8)
+                Resize(_m / 2);
+            
+            return ret;
         }
         
         // helpers

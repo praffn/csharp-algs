@@ -100,5 +100,20 @@ namespace CDS.Tests.Collections
             map.Clear();
             Assert.True(map.Empty);
         }
+
+        [Fact]
+        public void Remove_removes_key_and_value_and_decrements_count_and_returns_value_associated_with_key()
+        {
+            var map = new HashMap<string, string>();
+            map["hello"] = "world";
+            map["goodbye"] = "sky";
+
+            var val = map.Remove("hello");
+            
+            Assert.Equal(1, map.Count);
+            Assert.False(map.ContainsKey("hello"));
+            Assert.False(map.ContainsValue("world"));
+            Assert.Equal("world", val);
+        }
     }
 }
