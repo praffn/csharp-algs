@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CDS
+namespace CDS.Collections
 {
     public interface IMap<in K, V>
     {

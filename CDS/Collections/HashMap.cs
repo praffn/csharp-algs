@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CDS
+namespace CDS.Collections
 {
     public class HashMap<K, V> : IMap<K, V>
     {

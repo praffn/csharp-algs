@@ -1,6 +1,7 @@
-﻿using Xunit;
+﻿using CDS.Collections;
+using Xunit;
 
-namespace CDS.Tests
+namespace CDS.Tests.Collections
 {
     public class HashMapTests
     {
