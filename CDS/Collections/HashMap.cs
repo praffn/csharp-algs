@@ -1,32 +1,33 @@
-﻿using System;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace CDS.Collections
 {
-    public class HashMap<K, V> : IMap<K, V>
+    public class HashMap<TKey, TValue> : IMap<TKey, TValue>
     {
-        public int Count { get; private set; } = 0;
+        public int Count { get; private set; }
         public bool Empty => Count == 0;
 
         private int _m;
-        private K[] _keys;
-        private V[] _values;
+        private TKey[] _keys;
+        private TValue[] _values;
 
         public HashMap(int initialCapacity = 4)
         {
             _m = initialCapacity;
-            _keys = new K[_m];
-            _values = new V[_m];
+            _keys = new TKey[_m];
+            _values = new TValue[_m];
         }
         
         public void Clear()
         {
             _m = 4;
-            _keys = new K[_m];
-            _values = new V[_m];
+            _keys = new TKey[_m];
+            _values = new TValue[_m];
             Count = 0;
         }
 
-        public bool ContainsKey(K key)
+        public bool ContainsKey(TKey key)
         {
             try
             {
@@ -38,7 +39,7 @@ namespace CDS.Collections
             }
         }
 
-        public bool ContainsValue(V value)
+        public bool ContainsValue(TValue value)
         {
             foreach (var item in _values)
                 if (item != null && item.Equals(value))
@@ -46,7 +47,7 @@ namespace CDS.Collections
             return false;
         }
 
-        public V this[K key]
+        public TValue this[TKey key]
         {
             get
             {
@@ -80,26 +81,26 @@ namespace CDS.Collections
             }
         }
         
-        public V Remove(K key)
+        public TValue Remove(TKey key)
         {
             if (!ContainsKey(key))
-                return default(V);
+                return default(TValue);
             var i = Hash(key);
 
             while (!key.Equals(_keys[i]))
                 i = (i + 1) % _m;
 
             var ret = _values[i];
-            _keys[i] = default(K);
-            _values[i] = default(V);
+            _keys[i] = default(TKey);
+            _values[i] = default(TValue);
 
             i = (i + 1) % _m;
             while (_keys[i] != null)
             {
                 var rehashKey = _keys[i];
                 var rehashVal = _values[i];
-                _keys[i] = default(K);
-                _values[i] = default(V);
+                _keys[i] = default(TKey);
+                _values[i] = default(TValue);
                 Count--;
                 this[rehashKey] = rehashVal;
                 i = (i + 1) % _m;
@@ -113,14 +114,14 @@ namespace CDS.Collections
         }
         
         // helpers
-        private int Hash(K key)
+        private int Hash(TKey key)
         {
             return (key.GetHashCode() & 0x7fffffff) % _m;
         }
 
         private void Resize(int size)
         {
-            var tmp = new HashMap<K, V>(size);
+            var tmp = new HashMap<TKey, TValue>(size);
             for (var i = 0; i < _m; i++)
             {
                 if (_keys[i] != null)
@@ -129,6 +130,22 @@ namespace CDS.Collections
             _keys = tmp._keys;
             _values = tmp._values;
             _m = size;
+        }
+
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            for (var i = 0; i < _m; i++)
+            {
+                if (_keys[i] != null)
+                {
+                    yield return new KeyValuePair<TKey, TValue>(_keys[i], _values[i]);
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

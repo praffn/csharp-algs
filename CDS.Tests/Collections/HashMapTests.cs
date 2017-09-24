@@ -1,4 +1,5 @@
-﻿using CDS.Collections;
+﻿using System.Linq;
+using CDS.Collections;
 using Xunit;
 
 namespace CDS.Tests.Collections
@@ -114,6 +115,20 @@ namespace CDS.Tests.Collections
             Assert.False(map.ContainsKey("hello"));
             Assert.False(map.ContainsValue("world"));
             Assert.Equal("world", val);
+        }
+
+        [Fact]
+        public void HashMap_can_be_enumerated()
+        {
+            var map = new HashMap<string, string>
+            {
+                ["hello"] = "world",
+                ["goodbye"] = "heaven"
+            };
+
+            var expected = new[] {("hello", "world"), ("goodbye", "heaven")}.OrderBy(t => t);
+            var actual = map.Select(kvp => (kvp.Key, kvp.Value)).OrderBy(t => t);
+            Assert.Equal(expected, actual);
         }
     }
 }

@@ -1,24 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CDS.Collections
 {
-    public interface IMap<in K, V>
+    public interface IMap<TKey, TValue> : ICollection, IEnumerable<KeyValuePair<TKey, TValue>>
     {
-        bool Empty { get; }
-        int Count { get; }
+        bool ContainsKey(TKey key);
+        bool ContainsValue(TValue value);
         
-        void Clear();
-        bool ContainsKey(K key);
-        bool ContainsValue(V value);
-        
-        V this[K key] { get; set; }
-        V Remove(K key);
+        TValue this[TKey key] { get; set; }
+        TValue Remove(TKey key);
     }
 
     public class KeyNotFoundException : Exception
     {
         public KeyNotFoundException(string msg) : base(msg)
         {
+        }
+    }
+    
+    public struct KeyValuePair<TKey, TValue>
+    {
+        public TKey Key { get; }
+        public TValue Value { get; }
+
+        public KeyValuePair(TKey key, TValue value)
+        {
+            Key = key;
+            Value = value;
         }
     }
 }
