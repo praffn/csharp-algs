@@ -52,17 +52,30 @@ namespace CDS.Collections
 
         public ISet<T> Union(ISet<T> set)
         {
-            throw new NotImplementedException();
+            var union = new HashSet<T>();
+            foreach (var value in this)
+                union.Add(value);
+            foreach (var value in set)
+                union.Add(value);
+            return union;
         }
 
         public ISet<T> Intersect(ISet<T> set)
         {
-            throw new System.NotImplementedException();
+            var intersect = new HashSet<T>();
+            foreach (var value in this)
+                if (set.Contains(value))
+                    intersect.Add(value);
+            return intersect;
         }
 
         public ISet<T> Except(ISet<T> set)
         {
-            throw new System.NotImplementedException();
+            var except = new HashSet<T>();
+            foreach (var value in this)
+                if (!set.Contains(value))
+                    except.Add(value);
+            return except;
         }
     }
 }

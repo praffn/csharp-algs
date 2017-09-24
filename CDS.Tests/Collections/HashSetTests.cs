@@ -83,5 +83,38 @@ namespace CDS.Tests.Collections
             
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Union_creates_a_unioned_set()
+        {
+            var setA = new HashSet<string> { "A", "B", "C" };
+            var setB = new HashSet<string> { "D", "E", "F" };
+            var setU = setA.Union(setB);
+            
+            var expected = new HashSet<string> { "A", "B", "C", "D", "E", "F" };
+            Assert.Equal(expected.OrderBy(n => n), setU.OrderBy(n => n));
+        }
+
+        [Fact]
+        public void Intersect_creates_a_set_of_intersection()
+        {
+            var setA = new HashSet<string> { "A", "B", "C", "D" };
+            var setB = new HashSet<string> { "C", "D", "E", "F" };
+            var setI = setA.Intersect(setB);
+
+            var expected = new HashSet<string> {"C", "D"};
+            Assert.Equal(expected.OrderBy(n => n), setI.OrderBy(n => n));
+        }
+
+        [Fact]
+        public void Except_returns_new_set_with_values_in_a_not_in_b()
+        {
+            var setA = new HashSet<string> { "A", "B", "C", "D" };
+            var setB = new HashSet<string> { "C", "D", "E", "F" };
+            var setE = setA.Except(setB);
+            
+            var expected = new HashSet<string> { "A", "B" };
+            Assert.Equal(expected.OrderBy(n => n), setE.OrderBy(n => n));
+        }
     }
 }
