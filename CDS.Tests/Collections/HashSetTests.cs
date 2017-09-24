@@ -76,8 +76,12 @@ namespace CDS.Tests.Collections
         public void Set_can_be_enumerated()
         {
             string[] values = {"eric", "freddy", "george", "hilda"};
-            var set = CreateSetWithValues(values);   
-            Assert.True(set.OrderBy(v => v).SequenceEqual(values.OrderBy(v => v)));
+            var set = CreateSetWithValues(values);
+
+            var expected = values.OrderBy(n => n);
+            var actual = set.OrderBy(n => n);
+            
+            Assert.Equal(expected, actual);
         }
     }
 }

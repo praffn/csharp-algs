@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CDS.Collections
 {
@@ -20,7 +21,7 @@ namespace CDS.Collections
         
         public IEnumerator<T> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return _map.Select(kvp => kvp.Key).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
