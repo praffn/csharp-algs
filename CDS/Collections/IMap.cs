@@ -7,6 +7,8 @@ namespace CDS.Collections
     {
         bool ContainsKey(TKey key);
         bool ContainsValue(TValue value);
+
+        bool TryGet(TKey key, out TValue value);
         
         TValue this[TKey key] { get; set; }
         TValue Remove(TKey key);

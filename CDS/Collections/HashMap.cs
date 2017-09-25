@@ -47,6 +47,17 @@ namespace CDS.Collections
             return false;
         }
 
+        public bool TryGet(TKey key, out TValue value)
+        {
+            if (ContainsKey(key))
+            {
+                value = this[key];
+                return true;
+            }
+            value = default(TValue);
+            return false;
+        }
+
         public TValue this[TKey key]
         {
             get

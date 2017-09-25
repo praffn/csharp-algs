@@ -67,6 +67,24 @@ namespace CDS.Tests.Collections
         }
 
         [Fact]
+        public void TryGet_sets_out_param()
+        {
+            var map = new HashMap<string, string> {["hello"] = "world"};
+            var ok = map.TryGet("hello", out var value);
+            Assert.True(ok);
+            Assert.Equal("world", value);
+        }
+
+        [Fact]
+        public void TryGet_returns_false_on_nonexisting_key()
+        {
+            var map = new HashMap<string, string>();
+            var ok = map.TryGet("hello", out var value);
+            Assert.False(ok);
+            Assert.Equal(default(string), value);
+        }
+
+        [Fact]
         public void Settings_twice_overrides()
         {
             var map = new HashMap<string, string>();
