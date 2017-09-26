@@ -136,6 +136,14 @@ namespace CDS.Tests.Collections
         }
 
         [Fact]
+        public void KeySet_returns_set_of_keys()
+        {
+            var map = new HashMap<string, string> { ["a"] = "A", ["b"] = "B" };
+            var keySet = map.KeySet();
+            Assert.True(keySet.OrderBy(k => k).SequenceEqual(new []{ "a", "b" }));
+        }
+
+        [Fact]
         public void HashMap_can_be_enumerated()
         {
             var map = new HashMap<string, string>

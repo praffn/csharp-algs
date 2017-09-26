@@ -123,7 +123,16 @@ namespace CDS.Collections
             
             return ret;
         }
-        
+
+        public ISet<TKey> KeySet()
+        {
+            var keySet = new HashSet<TKey>();
+            foreach (var key in _keys)
+                if (key != null)
+                    keySet.Add(key);
+            return keySet;
+        }
+
         // helpers
         private int Hash(TKey key)
         {
