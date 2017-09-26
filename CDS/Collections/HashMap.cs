@@ -133,6 +133,14 @@ namespace CDS.Collections
             return keySet;
         }
 
+        public IList<TValue> Values()
+        {
+            var values = new ArrayList<TValue>();
+            foreach (var key in KeySet())
+                values.Add(this[key]);
+            return values;
+        }
+
         // helpers
         private int Hash(TKey key)
         {

@@ -14,6 +14,7 @@ namespace CDS.Collections
         TValue Remove(TKey key);
 
         ISet<TKey> KeySet();
+        IList<TValue> Values();
     }
 
     public class KeyNotFoundException : Exception

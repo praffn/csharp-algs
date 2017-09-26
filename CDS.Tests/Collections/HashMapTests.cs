@@ -144,6 +144,19 @@ namespace CDS.Tests.Collections
         }
 
         [Fact]
+        public void Values_returns_list_of_values()
+        {
+            var map = new HashMap<string, string>
+            {
+                ["hello"] = "world",
+                ["goodbye"] = "world",
+                ["hola"] = "mundo",
+            };
+            var expected = new[] {"mundo", "world", "world"};
+            Assert.True(map.Values().OrderBy(v => v).SequenceEqual(expected));
+        }
+
+        [Fact]
         public void HashMap_can_be_enumerated()
         {
             var map = new HashMap<string, string>
