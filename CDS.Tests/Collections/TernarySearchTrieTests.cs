@@ -54,6 +54,34 @@ namespace CDS.Tests.Collections
             Assert.Equal(2, trie.Get("test"));
         }
 
+        [Fact]
+        public void Test_Get_With_Empty_Trie_Returns_Null()
+        {
+            var trie = new TernarySearchTrie<int>();
+            Assert.Null(trie.Get("test"));
+        }
+
+        [Fact]
+        public void Test_Get_With_Element_Returns_Correct_value()
+        {
+            var trie = new TernarySearchTrie<int>();
+
+            trie.Put("test", 10);
+
+            Assert.Equal(10, trie.Get("test"));
+        }
+
+        [Fact]
+        public void Test_Get_Returns_Correct_Value_After_Put_With_Same_Key()
+        {
+            var trie = new TernarySearchTrie<int>();
+
+            trie.Put("test", 10);
+            trie.Put("test", 42);
+
+            Assert.Equal(42, trie.Get("test"));
+        }
+
 
 
     }
