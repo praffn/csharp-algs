@@ -17,7 +17,7 @@ namespace CDS.Collections
         public Value Get(string key)
         {
             Node node = Get(root, key, 0);
-            if (node == null) return default(Value);
+            if (node == null) return default(Value); // If the node is null, return null
             return node.val;
         }
 
