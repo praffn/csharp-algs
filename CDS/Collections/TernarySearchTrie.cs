@@ -6,10 +6,20 @@ namespace CDS.Collections
 {
     public class TernarySearchTrie<Value> : ITrie<Value>
     {
+        private Node root;
+
         // Returns the number of 
         public int Count { get; private set;  } 
+
         public Value Get(string key)
         {
+            Node node = Get(root, key, 0);
+            if (node == null)
+            {
+                return default(Value);
+            }
+            return node.val;
+
             throw new NotImplementedException();
         }
 
@@ -31,9 +41,9 @@ namespace CDS.Collections
 
         private class Node
         {
-            char c;
-            Node left, mid, right;
-            Value val;
+            internal char c;
+            internal Node left, mid, right;
+            internal Value val;
         }
     }
 }
