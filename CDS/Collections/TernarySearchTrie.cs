@@ -14,17 +14,20 @@ namespace CDS.Collections
         // Returns the number of 
         public int Count { get; private set;  } 
 
-        public Value Get(string key)
+        public Value Get(String key)
         {
             Node node = Get(root, key, 0);
-            if (node == null) return default(Value); // If the node is null, return null
+            // If the node is null, return null
+            if (node == null) return default(Value); 
             return node.val;
         }
 
         private Node Get(Node node, string key, int depth)
         {
-            if (node == null) return default(Node); // If the node is null, return null
-            char c = key[depth]; // Set current character in local variable
+            // If the node is null, return null
+            if (node == null) return default(Node);
+            // Set current character in local variable
+            char c = key[depth]; 
 
             if (c < node.character) return Get(node.left, key, depth);
             else if (c > node.character) return Get(node.right, key, depth);
@@ -32,15 +35,29 @@ namespace CDS.Collections
             else return node;
         }
 
-        public void Put(string key, Value val)
+        public void Put(String key, Value val)
         {
-            throw new NotImplementedException();
-            Count++;
+            root = Put(root, key, val, 0);
         }
 
-        private Node Put(Node node, string key, Value val, int depth)
+        private Node Put(Node node, String key, Value val, int depth)
         {
-            throw new NotImplementedException();
+            // Set the current character in local variable
+            char c = key[depth]; 
+            // If the node is null, create a new node and set its character.
+            if (node == null)
+            {
+                node = new Node();
+                node.character = c;
+            }
+
+            if (c < node.character) node.left = Put(node.left, key, val, depth);
+            else if (c > node.character) node.right = Put(node.right, key, val, depth);
+            else if (depth < key.Length) node.mid = Put(node.mid, key, val, depth + 1);
+            else node.val = val;
+
+            return node;
+
         }
 
         private class Node
