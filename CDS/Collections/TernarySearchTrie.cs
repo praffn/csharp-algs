@@ -17,18 +17,19 @@ namespace CDS.Collections
         public Value Get(string key)
         {
             Node node = Get(root, key, 0);
-            if (node == null)
-            {
-                return default(Value);
-            }
+            if (node == null) return default(Value);
             return node.val;
-
-            throw new NotImplementedException();
         }
 
         private Node Get(Node node, string key, int depth)
         {
-            throw new NotImplementedException();
+            if (node == null) return default(Node); // If the node is null, return null
+            char c = key[depth]; // Set current character in local variable
+
+            if (c < node.character) return Get(node.left, key, depth);
+            else if (c > node.character) return Get(node.right, key, depth);
+            else if (depth < key.Length - 1) return Get(node.mid, key, depth + 1);
+            else return node;
         }
 
         public void Put(string key, Value val)
@@ -44,7 +45,7 @@ namespace CDS.Collections
 
         private class Node
         {
-            internal char c;
+            internal char character;
             internal Node left, mid, right;
             internal Value val;
         }
