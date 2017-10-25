@@ -4,6 +4,9 @@ using System.Text;
 
 namespace CDS.Collections
 {
+    /**
+     * Ternary Search Trie (TST) based on Sedwick and Wayne, Algorithms Fourth Edition's TST.
+     **/
     public class TernarySearchTrie<Value> : ITrie<Value>
     {
         private Node root;
