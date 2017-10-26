@@ -6,28 +6,19 @@ namespace CDS.Tests.Collections
 {
     public class TernarySearchTrieTests
     {
-        [Fact]
-        public void Test_Put_Given_One_Element_Trie_Count_Equals_One()
+        [Theory]
+        [InlineData(1, "test")]
+        [InlineData(3, "test", "pest", "quest")]
+        [InlineData(5, "test", "pest", "quest", "nest", "best")]
+        public void Test_Put_Given_Elements_Trie_Count_Equals_Expected(int expected, params string[] inserts)
         {
             var trie = new TernarySearchTrie<string>();
 
-            trie.Put("test", "val");
-
-            Assert.Equal(1, trie.Count);
-        }
-
-        [Fact]
-        public void Test_Put_Given_Five_Elements_Trie_Count_Equals_Five()
-        {
-            var trie = new TernarySearchTrie<string>();
-
-            trie.Put("test", "val1");
-            trie.Put("pest", "val2");
-            trie.Put("quest", "val3");
-            trie.Put("best", "val4");
-            trie.Put("nest", "val5");
-
-            Assert.Equal(5, trie.Count);
+            for (var i = 0; i < inserts.Length; i++)
+            {
+                trie.Put(inserts[i], "val" + i);
+            }
+            Assert.Equal(expected, trie.Count);
         }
 
         [Fact]
