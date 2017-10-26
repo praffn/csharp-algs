@@ -11,7 +11,13 @@ namespace CDS.Collections
      **/
     public class TernarySearchTrie<Value> : ITrie<Value>
     {
+        private HashSet<string> keys;
         private Node root;
+
+        public TernarySearchTrie()
+        {
+            keys = new HashSet<string>();
+        }
 
         // Returns the number of 
         public int Count { get; private set;  } 
