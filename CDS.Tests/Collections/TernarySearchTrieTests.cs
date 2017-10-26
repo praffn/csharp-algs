@@ -1,7 +1,5 @@
 ﻿using CDS.Collections;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace CDS.Tests.Collections
