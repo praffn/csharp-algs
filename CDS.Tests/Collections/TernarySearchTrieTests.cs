@@ -57,7 +57,7 @@ namespace CDS.Tests.Collections
         [Fact]
         public void Test_Get_With_Empty_Trie_Returns_Null()
         {
-            var trie = new TernarySearchTrie<int>();
+            var trie = new TernarySearchTrie<String>();
             Assert.Null(trie.Get("test"));
         }
 
