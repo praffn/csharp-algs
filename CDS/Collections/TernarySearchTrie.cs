@@ -4,7 +4,7 @@ namespace CDS.Collections
 {
     /**
      * Ternary Search Trie (TST) based on Sedwick and Wayne, Algorithms Fourth Edition's TST.
-     * Note that this implementation MUST be used with non-primitive types. You may not use int, char, string etc.
+     * Note that this implementation MUST be used with non-primitive types. You may not use int, bool etc.
      * Use the Wrapper classes (That returns null as default value! Int32 does not return null) if you need to use them.
      **/
     public class TernarySearchTrie<TValue> : ITrie<TValue>
