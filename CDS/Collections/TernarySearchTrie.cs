@@ -19,6 +19,11 @@ namespace CDS.Collections
             keys = new HashSet<string>();
         }
 
+        public bool KeyExists(string key)
+        {
+            return keys.Contains(key);
+        }
+
         // Returns the number of 
         public int Count { get; private set;  } 
 
