@@ -7,7 +7,7 @@ namespace CDS.Collections
      * Note that this implementation MUST be used with non-primitive types. You may not use int, char, string etc.
      * Use the Wrapper classes (That returns null as default value! Int32 does not return null) if you need to use them.
      **/
-    public class TernarySearchTrie<Value> : ITrie<Value>
+    public class TernarySearchTrie<TValue> : ITrie<TValue>
     {
         private HashSet<string> keys;
         private Node root;
@@ -25,11 +25,11 @@ namespace CDS.Collections
         // Returns the number of 
         public int Count { get; private set;  } 
 
-        public Value Get(String key)
+        public TValue Get(String key)
         {
             Node node = Get(root, key, 0);
             // If the node is null, return null
-            if (node == null) return default(Value); 
+            if (node == null) return default(TValue); 
             return node.val;
         }
 
@@ -46,7 +46,7 @@ namespace CDS.Collections
             else return node;
         }
 
-        public void Put(String key, Value val)
+        public void Put(String key, TValue val)
         {
             if (key == null) throw new ArgumentException("Invalid key");
             if (!KeyExists(key)) Count++;
@@ -54,7 +54,7 @@ namespace CDS.Collections
             keys.Add(key);
         }
 
-        private Node Put(Node node, String key, Value val, int depth)
+        private Node Put(Node node, String key, TValue val, int depth)
         {
             // Set the current character in local variable
             char c = key[depth]; 
@@ -78,7 +78,7 @@ namespace CDS.Collections
         {
             internal char character;
             internal Node left, mid, right;
-            internal Value val;
+            internal TValue val;
         }
     }
 }

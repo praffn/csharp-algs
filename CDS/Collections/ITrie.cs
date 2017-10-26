@@ -4,9 +4,9 @@ using System.Text;
 
 namespace CDS.Collections
 {
-    public interface ITrie<Value>
+    public interface ITrie<TValue>
     {
-        Value Get(string key);
-        void Put(string key, Value val);
+        TValue Get(string key);
+        void Put(string key, TValue val);
     }
 }
