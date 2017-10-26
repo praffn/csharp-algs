@@ -38,6 +38,7 @@ namespace CDS.Collections
         public void Put(String key, Value val)
         {
             root = Put(root, key, val, 0);
+            Count++;
         }
 
         private Node Put(Node node, String key, Value val, int depth)
@@ -53,7 +54,7 @@ namespace CDS.Collections
 
             if (c < node.character) node.left = Put(node.left, key, val, depth);
             else if (c > node.character) node.right = Put(node.right, key, val, depth);
-            else if (depth < key.Length) node.mid = Put(node.mid, key, val, depth + 1);
+            else if (depth < key.Length - 1) node.mid = Put(node.mid, key, val, depth + 1);
             else node.val = val;
 
             return node;
