@@ -9,17 +9,17 @@ namespace CDS.Collections
      **/
     public class TernarySearchTrie<TValue> : ITrie<TValue>
     {
-        private HashSet<string> keys;
+        private HashSet<string> _keys;
         private Node root;
 
         public TernarySearchTrie()
         {
-            keys = new HashSet<string>();
+            _keys = new HashSet<string>();
         }
 
         public bool KeyExists(string key)
         {
-            return keys.Contains(key);
+            return _keys.Contains(key);
         }
 
         // Returns the number of 
@@ -51,7 +51,7 @@ namespace CDS.Collections
             if (key == null) throw new ArgumentException("Invalid key");
             if (!KeyExists(key)) Count++;
             root = Put(root, key, val, 0);
-            keys.Add(key);
+            _keys.Add(key);
         }
 
         private Node Put(Node node, String key, TValue val, int depth)
