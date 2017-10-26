@@ -50,8 +50,10 @@ namespace CDS.Collections
 
         public void Put(String key, Value val)
         {
+            if (key == null) throw new ArgumentException("Invalid key");
+            if (!KeyExists(key)) Count++;
             root = Put(root, key, val, 0);
-            Count++;
+            keys.Add(key);
         }
 
         private Node Put(Node node, String key, Value val, int depth)
