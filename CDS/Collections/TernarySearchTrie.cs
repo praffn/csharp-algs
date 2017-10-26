@@ -11,6 +11,8 @@ namespace CDS.Collections
     {
         private HashSet<string> _keys;
         private Node root;
+        // Returns the number of keys put in the tst
+        public int Count { get; private set;  } 
 
         public TernarySearchTrie()
         {
@@ -21,9 +23,6 @@ namespace CDS.Collections
         {
             return _keys.Contains(key);
         }
-
-        // Returns the number of 
-        public int Count { get; private set;  } 
 
         public TValue Get(String key)
         {
