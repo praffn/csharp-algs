@@ -102,6 +102,14 @@ namespace CDS.Tests.Collections
             Assert.False(trie.KeyExists("quest"));
         }
 
+        [Fact]
+        public void Test_Put_Given_Null_Key_Throws_ArgumentException()
+        {
+            var trie = new TernarySearchTrie<String>();
+            
+            Assert.Throws<ArgumentException>(() => trie.Put(null, "val"));
+        }
+
 
 
     }
