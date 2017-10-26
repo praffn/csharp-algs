@@ -3,6 +3,9 @@ dist: trusty
 sudo: required
 mono: none
 dotnet: 2.0.0
+install:
+  - npm install -g eclint@2.4.3
 script:
   - dotnet restore && dotnet build
   - dotnet test CDS.Tests
+  - eclint check **/*.cs
